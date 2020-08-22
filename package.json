@@ -1,38 +1,51 @@
 {
-  "name": "element-dyntable-demo",
+  "name": "elui-dyntable",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "dist/elui-dyntable.min.js",
+  "homepage": "https://github.com/Nomyfan/elui-dyntable",
+  "bugs": {
+    "url": "https://github.com/Nomyfan/elui-dyntable/issues",
+    "email": "Nomyfan@live.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Kim Chan",
+    "email": "Nomyfan@live.com",
+    "url": "https://github.com/Nomyfan"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build:lib": "webpack --display-error-details --config webpack.config.js",
+    "lint": "vue-cli-service lint",
+    "code:format": "prettier --write ./src/**/*",
+    "code:check": "prettier -c ./src/**/*"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "core-js": "^2.6.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.12.0",
     "@vue/cli-service": "^3.12.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "element-ui": "^2.13.2",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
+    "prettier": "^2.0.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue": "2.6.11",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "2.6.11",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12"
   },
   "postcss": {
     "plugins": {
