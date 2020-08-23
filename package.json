@@ -9,6 +9,9 @@
     "email": "Nomyfan@live.com"
   },
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "author": {
     "name": "Kim Chan",
     "email": "Nomyfan@live.com",

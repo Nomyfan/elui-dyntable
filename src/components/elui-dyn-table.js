@@ -33,7 +33,7 @@ const EluiDynTable = {
       c.componentOptions.Ctor.extendOptions.name === "EluiDynColumn";
     const dynColumns = (this.$slots.default || []).filter(isDynColumn);
     const keyOf = (c) => c.componentOptions.propsData.prop;
-    const columnGroups = group(dynColumns || [], keyOf);
+    const columnGroups = group(dynColumns, keyOf);
 
     const children = [];
     for (let d of this.desc) {
