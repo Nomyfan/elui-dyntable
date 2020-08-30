@@ -1,5 +1,33 @@
 const inlist = (v, list) => list.indexOf(v) >= 0;
 
+const externalFormatter = {};
+
+/**
+ * Specified a new formatter globally. Any formatter specified
+ * using this function has higher priority than those who are internal.
+ * Specified twice will override the one previously specified.
+ * formatter is accetable when it's a function.
+ * @param {string} type
+ * @param {(prop: any, scope: any) => string} formatter
+ */
+export function addFormatter(type, formatter) {
+  if (typeof formatter === "function") {
+    externalFormatter[type] = formatter;
+  }
+}
+
+/**
+ * Remove a global formatter and return it.
+ * @param {string} type
+ */
+export function removeFormatter(type) {
+  const formatter = externalFormatter[type];
+  if (formatter) {
+    delete externalFormatter[type];
+  }
+  return formatter;
+}
+
 function formatNumber(prop) {
   return prop ? prop : 0;
 }
@@ -66,6 +94,19 @@ function formatterByType(prop) {
 }
 
 export function format({ formatter, prop, scope, extra }) {
+  if (
+    formatter === "custom" &&
+    extra &&
+    extra.formatter &&
+    typeof extra.formatter === "function"
+  ) {
+    return extra.formatter(prop, scope);
+  }
+
+  if (externalFormatter[formatter]) {
+    return externalFormatter[formatter](prop, scope);
+  }
+
   if (formatter === "number") {
     return formatNumber(prop);
   }
@@ -77,14 +118,6 @@ export function format({ formatter, prop, scope, extra }) {
   }
   if (formatter === "second") {
     return formatSecond(prop);
-  }
-  if (
-    formatter === "custom" &&
-    extra &&
-    extra.formatter &&
-    typeof extra.formatter === "function"
-  ) {
-    return extra.formatter(prop, scope);
   }
   return formatterByType(prop)(prop, extra);
 }
