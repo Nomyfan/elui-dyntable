@@ -1,6 +1,6 @@
 import { EluiDynTable } from "./elui-dyn-table";
 import EluiDynColumn from "./elui-dyn-column";
-import { addFormatter, removeFormatter } from "../utils/format";
+import { setFormatter } from "../utils/format";
 
 const components = [EluiDynColumn, EluiDynTable];
 
@@ -18,7 +18,7 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 
-export { EluiDynColumn, EluiDynTable, addFormatter, removeFormatter };
+export { EluiDynColumn, EluiDynTable, setFormatter };
 
 export default {
   install,

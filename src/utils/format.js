@@ -6,26 +6,17 @@ const externalFormatter = {};
  * Specified a new formatter globally. Any formatter specified
  * using this function has higher priority than those who are internal.
  * Specified twice will override the one previously specified.
- * formatter is accetable when it's a function.
  * @param {string} type
- * @param {(prop: any, scope: any) => string} formatter
+ * @param {(prop: any, scope: any) => string | undefined} formatter
  */
-export function addFormatter(type, formatter) {
+export function setFormatter(type, formatter) {
   if (typeof formatter === "function") {
     externalFormatter[type] = formatter;
-  }
-}
-
-/**
- * Remove a global formatter and return it.
- * @param {string} type
- */
-export function removeFormatter(type) {
-  const formatter = externalFormatter[type];
-  if (formatter) {
+  } else if (formatter === undefined) {
+    const f = externalFormatter[type];
     delete externalFormatter[type];
+    return f;
   }
-  return formatter;
 }
 
 function formatNumber(prop) {
