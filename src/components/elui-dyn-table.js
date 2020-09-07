@@ -30,6 +30,7 @@ const EluiDynTable = {
   },
   render: function (h) {
     const isDynColumn = (c) =>
+      c.componentOptions &&
       c.componentOptions.Ctor.extendOptions.name === "EluiDynColumn";
     const dynColumns = (this.$slots.default || []).filter(isDynColumn);
     const keyOf = (c) => c.componentOptions.propsData.prop;
