@@ -7,7 +7,8 @@
       @change="handleSwitchChange"
     ></el-switch>
     <EluiDynTable :desc="tableDesc" :data="tableData" ref="table">
-      <EluiDynColumn prop="operation">
+      <ElTableColumn type="selection" width="50" prop="selection" />
+      <ElTableColumn prop="operation">
         <span slot="header">
           自定义
         </span>
@@ -16,7 +17,7 @@
             >删除</el-button
           >
         </div>
-      </EluiDynColumn>
+      </ElTableColumn>
     </EluiDynTable>
   </div>
 </template>
@@ -28,6 +29,7 @@ export default {
     return {
       switchModel: true,
       tableDesc: [
+        { prop: "selection" },
         { prop: "name", label: "名字" },
         { prop: "city", label: "城市" },
         { prop: "born", label: "出生时间", formatter: "ts" },

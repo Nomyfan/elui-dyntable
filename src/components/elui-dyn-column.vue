@@ -1,12 +1,7 @@
 <template>
   <el-table-column v-bind="$attrs">
-    <template slot="header" slot-scope="h">
-      <slot name="header" v-bind="h">{{ h.column.label }}</slot>
-    </template>
     <template slot-scope="scope">
-      <slot v-bind="scope">
-        <span>{{ formatRow(scope.row[prop], scope) }}</span>
-      </slot>
+      <span>{{ formatRow(scope.row[prop], scope) }}</span>
     </template>
   </el-table-column>
 </template>

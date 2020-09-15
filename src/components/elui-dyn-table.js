@@ -29,12 +29,12 @@ const EluiDynTable = {
     },
   },
   render: function (h) {
-    const isDynColumn = (c) =>
+    const isElTableColumn = (c) =>
       c.componentOptions &&
-      c.componentOptions.Ctor.extendOptions.name === "EluiDynColumn";
-    const dynColumns = (this.$slots.default || []).filter(isDynColumn);
+      c.componentOptions.Ctor.extendOptions.name === "ElTableColumn";
+    const columns = (this.$slots.default || []).filter(isElTableColumn);
     const keyOf = (c) => c.componentOptions.propsData.prop;
-    const columnGroups = group(dynColumns, keyOf);
+    const columnGroups = group(columns, keyOf);
 
     const children = [];
     for (let d of this.desc) {
@@ -42,16 +42,7 @@ const EluiDynTable = {
         continue;
       }
       let child = columnGroups[d.prop];
-      if (child) {
-        const propKeys = Object.keys(child.componentOptions.Ctor.options.props);
-        for (let k in d) {
-          if (propKeys.indexOf(k) >= 0) {
-            child.componentOptions.propsData[k] = d[k];
-          } else {
-            child.data.attrs[k] = d[k];
-          }
-        }
-      } else {
+      if (!child) {
         const propKeys = Object.keys(EluiDynColumn.props);
         const props = {};
         const attrs = {};
