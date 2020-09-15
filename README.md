@@ -8,7 +8,8 @@
 
 - 可以控制列是否显示。
 
-- 保留了 ElColumn 的 slot 能力，可以自定义列模版内容。
+- 保留了 ElTableColumn，可以自定义列模版内容。
+- 传递数据对象（Data Object）完成响应ElTable事件。
 
 ## 例子
 
@@ -50,12 +51,16 @@ export default {
 };
 ```
 
-### 2. 自定义列
+### 2. 自定义列以及响应事件
 
 ![](./assets/Snipaste_2020-08-22_17-58-40.jpg)
 
 ```html
-<EluiDynTable :desc="tableDesc" :data="tableData">
+<EluiDynTable
+  :desc="tableDesc"
+  :data="tableData"
+  :dataObject="dataObject"
+>
   <ElTableColumn type="selection" width="50" prop="selection" />
   <ElTableColumn prop="operation">
     <span slot="header">
@@ -79,6 +84,14 @@ export default {
   },
   data() {
     return {
+      dataObject: {
+        on: {
+          "selection-change": (val) => {
+            /* eslint-disable no-console */
+            console.log(val);
+          },
+        },
+      },
       tableDesc: [
         { prop: "selection" },
         { prop: "name", label: "名字" },
