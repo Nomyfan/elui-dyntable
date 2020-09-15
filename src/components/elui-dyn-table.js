@@ -14,6 +14,10 @@ const EluiDynTable = {
       type: Array,
       default: () => [],
     },
+    dataObject: {
+      type: Object,
+      default: undefined,
+    },
   },
   methods: {
     toggle(prop, hidden) {
@@ -60,7 +64,11 @@ const EluiDynTable = {
       }
       children.push(child);
     }
-    return h(Table, { props: this.$props, attrs: this.$attrs }, children);
+    return h(
+      Table,
+      { props: { data: this.data, ...this.$attrs }, ...this.dataObject },
+      children,
+    );
   },
 };
 

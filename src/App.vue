@@ -6,7 +6,12 @@
       v-model="switchModel"
       @change="handleSwitchChange"
     ></el-switch>
-    <EluiDynTable :desc="tableDesc" :data="tableData" ref="table">
+    <EluiDynTable
+      :desc="tableDesc"
+      :data="tableData"
+      :dataObject="dataObject"
+      ref="table"
+    >
       <ElTableColumn type="selection" width="50" prop="selection" />
       <ElTableColumn prop="operation">
         <span slot="header">
@@ -28,6 +33,14 @@ export default {
   data() {
     return {
       switchModel: true,
+      dataObject: {
+        on: {
+          "selection-change": (val) => {
+            /* eslint-disable no-console */
+            console.log(val);
+          },
+        },
+      },
       tableDesc: [
         { prop: "selection" },
         { prop: "name", label: "名字" },
