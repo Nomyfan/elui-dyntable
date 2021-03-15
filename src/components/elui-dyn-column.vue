@@ -11,13 +11,14 @@ import { format } from "../utils/format";
 
 export default {
   name: "EluiDynColumn",
-  props: ["prop", "formatter", "extra"],
+  props: ["prop", "formatter", "extra", "tester"],
   methods: {
     formatRow(prop, scope) {
       return format({
         formatter: this.formatter,
         prop,
         scope,
+        tester: this.tester,
         extra: this.extra,
       });
     },

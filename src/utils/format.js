@@ -33,7 +33,7 @@ function formatArray(array, extra) {
       .concat((extra && extra.suffix) || "");
   }
   /* eslint-disable no-console */
-  console.error(`${array}不是数组`);
+  console.error(`${array} is not an array`);
   return "";
 }
 
@@ -77,24 +77,25 @@ function formatterByType(prop) {
     return formatArray;
   }
   return () => {
-    const errMsg = `找不到适合[${type}]类型的格式化器，可以尝试自己定义格式化器`;
+    const errMsg = `cannot find a suitable formatter for [${type}], you can try to define you own formatter by calling setFormatter`;
     /* eslint-disable no-console */
     console.error(errMsg);
     return "";
   };
 }
 
-export function format({ formatter, prop, scope, extra }) {
-  if (
-    formatter === "custom" &&
-    extra &&
-    extra.formatter &&
-    typeof extra.formatter === "function"
-  ) {
-    return extra.formatter(prop, scope);
+export function format({ formatter, tester, prop, scope, extra }) {
+  if (tester && typeof tester === "function") {
+    if (!tester(prop, scope)) {
+      return "";
+    }
   }
 
-  if (externalFormatter[formatter]) {
+  if (typeof formatter === "function") {
+    return formatter(prop, scope);
+  }
+
+  if (typeof formatter === "string" && externalFormatter[formatter]) {
     return externalFormatter[formatter](prop, scope);
   }
 
