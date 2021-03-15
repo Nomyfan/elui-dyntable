@@ -2,6 +2,8 @@ import { Table } from "element-ui";
 import EluiDynColumn from "./elui-dyn-column";
 import { group } from "../utils/list";
 
+const ElTable = Table;
+
 const EluiDynTable = {
   name: "EluiDynTable",
 
@@ -13,10 +15,6 @@ const EluiDynTable = {
     desc: {
       type: Array,
       default: () => [],
-    },
-    dataObject: {
-      type: Object,
-      default: undefined,
     },
   },
   methods: {
@@ -65,8 +63,11 @@ const EluiDynTable = {
       children.push(child);
     }
     return h(
-      Table,
-      { props: { data: this.data, ...this.$attrs }, ...this.dataObject },
+      ElTable,
+      {
+        props: { data: this.data, ...this.$attrs },
+        on: this.$listeners,
+      },
       children,
     );
   },

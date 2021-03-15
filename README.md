@@ -9,7 +9,7 @@
 - 可以控制列是否显示。
 
 - 保留了 ElTableColumn，可以自定义列模版内容。
-- 传递数据对象（Data Object）完成响应ElTable事件。
+- 正常响应 ElTable 事件。
 
 ## 例子
 
@@ -59,7 +59,7 @@ export default {
 <EluiDynTable
   :desc="tableDesc"
   :data="tableData"
-  :dataObject="dataObject"
+  @selection-change="handleSelectChange"
 >
   <ElTableColumn type="selection" width="50" prop="selection" />
   <ElTableColumn prop="operation">
@@ -84,14 +84,6 @@ export default {
   },
   data() {
     return {
-      dataObject: {
-        on: {
-          "selection-change": (val) => {
-            /* eslint-disable no-console */
-            console.log(val);
-          },
-        },
-      },
       tableDesc: [
         { prop: "selection" },
         { prop: "name", label: "名字" },
@@ -117,6 +109,10 @@ export default {
     handleClick(row, index) {
       /* eslint-disable no-console */
       console.log(`deleting ${row.name} at ${index}`);
+    },
+    handleSelectChange(val) {
+      /* eslint-disable no-console */
+      console.log(val);
     },
   },
 };

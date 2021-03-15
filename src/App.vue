@@ -9,7 +9,7 @@
     <EluiDynTable
       :desc="tableDesc"
       :data="tableData"
-      :dataObject="dataObject"
+      @selection-change="handleSelectChange"
       ref="table"
     >
       <ElTableColumn type="selection" width="50" prop="selection" />
@@ -33,14 +33,6 @@ export default {
   data() {
     return {
       switchModel: true,
-      dataObject: {
-        on: {
-          "selection-change": (val) => {
-            /* eslint-disable no-console */
-            console.log(val);
-          },
-        },
-      },
       tableDesc: [
         { prop: "selection" },
         { prop: "name", label: "名字" },
@@ -69,6 +61,10 @@ export default {
     },
     handleSwitchChange() {
       this.$refs.table.toggle("born");
+    },
+    handleSelectChange(val) {
+      /* eslint-disable no-console */
+      console.log(val);
     },
   },
 };
